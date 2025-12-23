@@ -1,5 +1,5 @@
-python.exe -m pip install --upgrade pip
-pip install fastapi uvicorn
-pip install langchain
-pip install langchain-openai
-pip install pymongo 
+fastapi
+uvicorn
+langchain
+langchain-openai
+pymongo
