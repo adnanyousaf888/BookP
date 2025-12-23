@@ -1,0 +1,62 @@
+<!-- 
+ FLOATING LAUNCHER -->
+<div id="bp-launcher">
+  <div class="bp-orb">
+    <div class="book-3d">
+      <div class="cover front"></div>
+      <div class="cover back"></div>
+      <div class="pages"></div>
+      <div class="spine"></div>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP FORM -->
+<form id="bp-form" autocomplete="on" style="display:none;">
+  <h3>📗 <span>BookProo</span></h3>
+
+  <input id="bp-name" name="name" autocomplete="name" placeholder="Your Name" required />
+  <input id="bp-email" name="email" autocomplete="email" type="email" placeholder="Your Email" required />
+
+  <div class="bp-phone-row">
+    <select id="bp-cc" name="countryCode" autocomplete="tel-country-code"></select>
+    <input id="bp-phone" name="phone" autocomplete="tel" type="tel" placeholder="Phone Number" required />
+  </div>
+ <label class="bp-consent">
+  <input type="checkbox" id="bp-consent" />
+  <span>
+    I agree to be contacted regarding services and appointments via email or phone.
+  </span>
+</label>
+
+<p class="bp-privacy">
+  Your information is kept confidential and used only to respond to your inquiry.
+  <a href="https://thebookpromoters.com/privacy-policy/" target="_blank">Privacy Policy</a>
+</p>
+
+
+  <button id="bp-start" type="button">Start Chat</button>
+</form>
+
+<!-- CHAT WINDOW -->
+<div id="bp-chat" style="display:none;">
+  <div id="bp-header">
+    📗 BookProo
+    <button id="bp-close">✖</button>
+  </div>
+
+  <div id="bp-messages"></div>
+
+  <div id="bp-typing">
+    <span>BookProo is typing</span>
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  </div>
+
+  <div id="bp-inputbar">
+    <input id="bp-input" placeholder="Type your message..." />
+    <button id="bp-send">Send</button>
+  </div>
+</div>
+
+<link rel="stylesheet" href="book-proo.css">
+<script src="book-proo.js"></script>
