@@ -26,20 +26,7 @@ from database.mongo import (
 app = FastAPI()
 
 # ======================================================
-# SERVE FRONTEND (STATIC FILES)
-# ======================================================
-app.mount(
-    "/frontend",
-    StaticFiles(directory="frontend", html=True),
-    name="frontend"
-)
-
-@app.get("/")
-def serve_home():
-    return FileResponse("frontend/book-proo.html")
-
-# ======================================================
-# CORS
+# CORS (safe for now, tighten later)
 # ======================================================
 app.add_middleware(
     CORSMiddleware,
@@ -48,6 +35,23 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ======================================================
+# SERVE FRONTEND (STATIC FILES)
+# ======================================================
+# This exposes:
+# /frontend/book-proo.css
+# /frontend/book-proo.js
+app.mount(
+    "/frontend",
+    StaticFiles(directory="frontend"),
+    name="frontend"
+)
+
+# Main UI
+@app.get("/")
+def serve_home():
+    return FileResponse("frontend/book-proo.html")
 
 # ======================================================
 # REQUEST MODELS
@@ -67,7 +71,6 @@ class ChatMessage(BaseModel):
 class EndChat(BaseModel):
     email: str
     session_id: str
-
 
 # ======================================================
 # START CHAT
@@ -96,7 +99,6 @@ async def start_chat(req: StartChat):
         "welcome": welcome,
     }
 
-
 # ======================================================
 # CHAT MESSAGE
 # ======================================================
@@ -124,9 +126,8 @@ async def chat_message(req: ChatMessage):
         print("❌ Error in /chat_message:", e)
         return {"reply": "Sorry, something went wrong on my side."}
 
-
 # ======================================================
-# END CHAT
+# END CHAT (ANALYTICS ONCE)
 # ======================================================
 @app.post("/end_chat")
 async def end_chat(req: EndChat):
@@ -157,11 +158,3 @@ async def end_chat(req: EndChat):
     except Exception as e:
         print("❌ Error in /end_chat:", e)
         return {"status": "error"}
-
-
-# ======================================================
-# DEV SERVER
-# ======================================================
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("server:app", host="127.0.0.1", port=5500, reload=True)
